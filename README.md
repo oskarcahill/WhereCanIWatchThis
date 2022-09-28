@@ -7,6 +7,7 @@ App is currently functional for the UK and Ireland.
 ## Stack
 
 Frontend - React Native 
+
 Backend - Express server, Cheerio
 
 ## Installation
