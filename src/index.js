@@ -58,7 +58,7 @@ const App = () => {
                 }}}/>
                 <Stack.Screen name="Default" children={() => <DefaultScreen nextPage="Home"/>} />     
                 <Stack.Screen name="Results" children={() => <ResultsScreen/>} initialParams={{test: 12}} options={{ title: 'Results', headerStyle: {
-                    backgroundColor: '#051641'
+                    backgroundColor: '#121212'
                 },headerLeft: () => (
                     <View>   
                     </View>

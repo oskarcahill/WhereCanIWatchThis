@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
       },
       resultContainer: {
-          backgroundColor: "#051641"
+          backgroundColor: "#121212"
       },
       iconContainer: {
           flexDirection: "row",
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
       },
       headerContainer: {
           marginTop: 20,
-          backgroundColor: "#051641",
+          backgroundColor: "#121212",
           marginBottom: 20,
           borderRadius: 10,
           borderBottomColor: "#E3EEFF",
