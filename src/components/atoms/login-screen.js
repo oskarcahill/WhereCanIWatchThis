@@ -1,71 +1,34 @@
-import ModernLoginScreen from "react-native-modern-login-screen";
 import { useNavigation } from '@react-navigation/native'
 import React from 'react';
-import {Text, StyleSheet, Button, View, Image, Dimensions, SafeAreaView, StatusBar, ScrollView, Alert, Modal, Pressable, TouchableOpacity} from 'react-native';
-import { LoginButton } from 'react-native-modern-login-screen';
-import * as RNLocalize from "react-native-localize";
-import Flag from 'react-native-flags';
-
+import {Text, StyleSheet, Button, View, Image, TouchableOpacity} from 'react-native';
 
 const LoginScreen = (props) => {
     const navigation = useNavigation();
 
     return (
-        /*<>
-            <ModernLoginScreen
-            title="Welcome to Where-Can-I-Watch"
-            description="Continue to find out where you can watch your favorite television and movies."
-            style={{marginTop: 32, marginLeft: 10}}
-            logoSource={require('../../assets/images/Logo36-01.png')}
-            >
-                <LoginButton
-                    text="Continue with media searcher"
-                    textStyle={styles.textStyle}
-                    style={{marginTop: 16, marginLeft: 5}}
-                    imageSource={require('../../assets/images/Logo36-01.png')}
-                    onPress={() => {
-                        navigation.navigate(props.nextPage)
-                    }}
-                />
-                <LoginButton
-                    //style={styles.textStyle}
-                    text="About us"
-                    textStyle={styles.textStyle}
-                    imageSource={require('../../assets/images/Logo36-01.png')}
-                    style={{marginTop: 32,marginLeft: 5}}
-                    onPress={() => {
-                        console.log("hello")
-                    }}
-                />
-            </ModernLoginScreen>
-        </>*/
         <View style={styles.container}>
             <View style={styles.logoContainer}>
                 <Image 
-                    source={{uri: "https://static.wixstatic.com/media/72c0b2_9417bad731e543578911f6110f4e9a2d~mv2.jpg/v1/fill/w_924,h_476,al_c,q_90/72c0b2_9417bad731e543578911f6110f4e9a2d~mv2.jpg"}}
+                    source={require('_assets/images/logo-dark-grey.png')}
                     style={styles.logo}
                 />
             </View>
-            <View style={styles.introTextContainer}>
-                <Text style={styles.headingText}>WhereCanIWatch</Text>
-                <View style={styles.subHeading}>
-                    <Text style={styles.subHeadingText}>Find out where you can watch your favorite Movies and TV shows</Text>
-                </View>
-            </View>
 
-            <View style={{flex: 2, backgroundColor: "#051641"}}>
+            <View style={{flex: 2, backgroundColor: "#121212"}}>
                 <View style={styles.buttonContainer1}>
                     <TouchableOpacity style={styles.buttonFormat} onPress={() => {
-                        navigation.navigate(props.nextPage);
+                        navigation.navigate(props.nextPageSearch);
                     }}>
                         <Text style={{justifyContent: "center", color: "#E3EEFF", fontFamily: "Roboto-Medium"}}>Search</Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            <View style={{flex: 2, backgroundColor: "#051641"}}>
+            <View style={{flex: 2, backgroundColor: "#121212"}}>
                 <View style={styles.buttonContainer2}>
-                        <TouchableOpacity style={styles.buttonFormat}>
+                        <TouchableOpacity style={styles.buttonFormat} onPress={() => {
+                            navigation.navigate(props.nextPageInfo)
+                        }}>
                             <Text style={{justifyContent: "center", color:"#E3EEFF", fontFamily: "Roboto-Medium"}}>Further Information</Text>
                         </TouchableOpacity>
                 </View>
@@ -86,7 +49,6 @@ const styles = StyleSheet.create({
     },
     headingText: {
         color: "#E3EEFF",
-        //fontWeight: "bold",
         fontSize: 25,
         fontFamily: "Roboto-Medium"
     },
@@ -106,8 +68,9 @@ const styles = StyleSheet.create({
         alignContent: "flex-end",
       },
     logo: {
-        width: 150,
-        height: 150
+        width: 400,
+        height: 400,
+        marginTop: 70
     },
     logoContainer: {
         flex: 3,
@@ -125,18 +88,18 @@ const styles = StyleSheet.create({
         flex: 2,
         marginRight: 50,
         marginLeft: 50,
-        backgroundColor: "#051641",
+        backgroundColor: "#121212",
         justifyContent: "center"
     },
     buttonContainer2: {
         flex: 2,
         marginRight: 50,
         marginLeft: 50,
-        backgroundColor: "#051641",
+        backgroundColor: "#121212",
         justifyContent: "flex-start"
     },
     buttonFormat: {
-        backgroundColor: "#051641",
+        backgroundColor: "#121212",
         alignItems: "center",
         padding: 10,
         borderRadius: 10,

@@ -1,43 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet, FlatList, View, Image, Dimensions, SafeAreaView, TouchableOpacity, StatusBar, ScrollView, Alert, Modal, Pressable, UIManager} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-const {width} = Dimensions.get('window');
 import { Avatar, Card, Button, Title, Paragraph } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native'
 import {useSelector, useDispatch} from 'react-redux'
-import { connect } from 'react-redux';
 import setIcons from 'components/redux/actions';
 import setPoster from 'components/redux/action-poster';
-
-import SelectDropdown from 'react-native-select-dropdown';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import KeyEvent from 'react-native-keyevent';
 import SearchBar from "react-native-dynamic-search-bar"
-const countries = ["Egypt", "Canada", "Australia", "Ireland", "Colombia", "Brazil", "Paraguay", "Uruguay", "Argentina"];
-const movies = [" "];
-const country = ""
-//var mediaName = " "
-import {staticData} from "./staticData";
+var country = ""
 
 const TestHelloWorld = (props) => {
+    console.log("this is the locale - ", props.locale)
     const [isLoading, setLoading] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
-    const myIcons = []
     const [data, setData] = useState([]); //movie title 
     const [image, setImage] = useState([]);
     const [description, setDescription] = useState([]);
     const [spinnerVisibility, setSpinnerVisibility] = useState(false)
     const navigation = useNavigation();
-    const mediaType = "movie";
-    //const mediaName = "belfast";
     const dispatch = useDispatch();
 
-    if(props.locale == "IE"){
+    if(props.locale.locale === "IE"){
         country = "ie"
     }
-    else if(props.locale == "GB"){
+    else if(props.locale.locale === "GB"){
         country = "uk"
+
     }
 
     if (Platform.OS === 'android') {
@@ -45,16 +32,23 @@ const TestHelloWorld = (props) => {
           UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
-    const retrievePlatforms = async (mediaName) => {
-        console.log("This is the media name: ", mediaName);
+
+    const retrievePlatforms = async (mediaName, description) => {
         const stream = []
         const rent = []
         const buy = []
+        let mediaType = ""
+        if(description.length > 7){
+            mediaType = "tv-series"
+        }
+        else{
+            mediaType = "movie"
+        }
         try{
-            const response = await fetch(`http://192.168.0.11:4000/api/platforms/${country}/${mediaType}/${mediaName}`);
+            const response = await fetch(`https://where-can-i-watch-backend.herokuapp.com/api/platforms/${country}/${mediaType}/${mediaName}`);
             const json = await response.json()
             results = json["result"]
-            console.log(json)
+            console.log("results from api call: ",results)
             for(let i=0; i <= 2; i++){
                 category = results[i] //category = frst round [x,x,x] second [] third [x,x,x]
                 for(let j=0; j < category.length; j++){
@@ -98,16 +92,12 @@ const TestHelloWorld = (props) => {
             
             const json = await response.json();   
             console.log(`Letter inputted - ${movieName}`);
-            //console.log(json)
             try{
                 var movie = json.results[0]
                 setData(movie.title)
                 mediaName = movie.title
                 setImage(movie.image)
                 setDescription(movie.description)
-                //console.log("movie image is the following ", {image})
-                console.log("movie title is the following ", mediaName)
-                //console.log("movie description is the following ", movie.description)
             }
             catch(error){
                 console.log(error)
@@ -135,7 +125,6 @@ const TestHelloWorld = (props) => {
                     shadowColor="#E3EEFF"
                     spinnerVisibility={spinnerVisibility}
                     placeholder="Enter Movie Name Here"
-                    onClearPress={() => alert("onClearPress")}
                     onChangeText={(text) => {
                         getMovies(text);
                         if(text.length === 0){
@@ -160,15 +149,16 @@ const TestHelloWorld = (props) => {
                                 console.log("Hello")
                             }}><Text style={styles.button}>Cancel</Text></TouchableOpacity>
                             <TouchableOpacity style={styles.touchable} onPress={() => {
-                                console.log("media name before being sent", mediaName)
-                                mediaName = mediaName.replace(/\s+/g, '-').toLowerCase();
-                                mediaName = mediaName.replace(/'/g, '');
-                                retrievePlatforms(mediaName).then((icons) => {
-                                    console.log("These are the streaming icons, ", icons[0]);
-                                    console.log("These are the renting icons, ", icons[1]);
-                                    console.log("These are the buying icons, ", icons[2]);
-                                    dispatch(setIcons([icons[0],icons[1],icons[2]]))
-                                }).then(dispatch(setPoster(image))).then(navigation.navigate(props.nextPage));
+                                try{
+                                    mediaName = mediaName.replace(/\s+/g, '-').toLowerCase();
+                                    mediaName = mediaName.replace(/'/g, '');
+                                    retrievePlatforms(mediaName,description).then((icons) => {
+                                        dispatch(setIcons([icons[0],icons[1],icons[2]]))
+                                    }).then(dispatch(setPoster(image))).then(navigation.navigate(props.nextPage));
+                                }
+                                catch(error){
+                                    alert("Please Enter a Movie or TV Show")
+                                }
                             }}><Text style={styles.button2}>Ok</Text></TouchableOpacity>
                         </Card.Actions>
                     </Card>
@@ -187,7 +177,7 @@ const styles = StyleSheet.create({
         flexDirection: "column"
     },
     searchBar: {
-        backgroundColor: "#051641",
+        backgroundColor: "#121212",
         justifyContent: "space-between",
         flex: 2
     },
@@ -195,13 +185,13 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     seachBarItem: {
-        backgroundColor: '#092670',
+        backgroundColor: '#272727',
         marginTop:10,
         borderColor: "#E3EEFF",
         borderWidth: 1
     },
     card: {
-        backgroundColor: "#051641",
+        backgroundColor: "#121212",
         flex: 10
     },
     button: {
@@ -221,8 +211,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         marginLeft:10,
         marginRight:10,
-        //backgroundColor: "#092670",
-        backgroundColor: "#092670",
+        backgroundColor: "#272727",
         marginLeft: 20,
         marginRight: 20,
         borderRadius: 10,
@@ -234,4 +223,3 @@ const styles = StyleSheet.create({
   });
 
 export default TestHelloWorld;
-//export default connect(mapStateToProps,mapDispatchToProps)(TestHelloWorld);
