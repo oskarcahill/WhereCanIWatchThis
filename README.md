@@ -4,6 +4,11 @@ WhereCanIWatchThis was developed to make searching for movies and tv shows a sim
 
 App is currently functional for the UK and Ireland.
 
+## Stack
+
+Frontend - React Native 
+Backend - Express server, Cheerio
+
 ## Installation
 
 First clone the repository using git clone.
