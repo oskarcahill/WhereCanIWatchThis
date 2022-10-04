@@ -29,6 +29,7 @@ npm run android / npm run ios
 ## Usage
 
 //TODO - Include Screenshots
+![1_new](https://user-images.githubusercontent.com/39191941/193873573-e06cd535-5d39-421e-ab76-5927bdc7c57e.jpeg)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
