@@ -28,10 +28,10 @@ npm run android / npm run ios
 
 ## Usage
 
-<img src="https://user-images.githubusercontent.com/39191941/193873573-e06cd535-5d39-421e-ab76-5927bdc7c57e.jpeg" width="170" height="300"> <img src="https://user-images.githubusercontent.com/39191941/193874156-7c9c3bc6-2599-431c-9491-14e236ed7500.jpeg" width="170" height="300">
-<img src="https://user-images.githubusercontent.com/39191941/193874199-f7b013e1-841a-4a42-b46a-34e9a4f0e770.jpeg" width="170" height="300">
-<img src="https://user-images.githubusercontent.com/39191941/193874231-2099f128-aa19-4037-a174-96c32c5acede.jpeg" width="170" height="300">
-<img src="https://user-images.githubusercontent.com/39191941/193874258-1438991e-42e7-4430-934c-a1d1b582e373.jpeg" width="170" height="300">
+<img src="https://user-images.githubusercontent.com/39191941/193873573-e06cd535-5d39-421e-ab76-5927bdc7c57e.jpeg" width="190" height="330"> <img src="https://user-images.githubusercontent.com/39191941/193874156-7c9c3bc6-2599-431c-9491-14e236ed7500.jpeg" width="190" height="330">
+<img src="https://user-images.githubusercontent.com/39191941/193874199-f7b013e1-841a-4a42-b46a-34e9a4f0e770.jpeg" width="190" height="330">
+<img src="https://user-images.githubusercontent.com/39191941/193874231-2099f128-aa19-4037-a174-96c32c5acede.jpeg" width="190" height="330">
+<img src="https://user-images.githubusercontent.com/39191941/193874258-1438991e-42e7-4430-934c-a1d1b582e373.jpeg" width="190" height="330">
 
 
 ## Contributing
